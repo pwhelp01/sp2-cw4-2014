@@ -2,6 +2,9 @@ package cw4;
 
 import static org.junit.Assert.*;
 
+import java.awt.Point;
+import java.util.List;
+
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -27,7 +30,7 @@ public class OceanTest {
 		
 	}
 	
-	@Test 
+	@Ignore @Test 
 	public void testPlaceShip() {
 		
 		Ocean ocean = new Ocean();
@@ -39,9 +42,18 @@ public class OceanTest {
 		//battleship.placeShipAt(0,0, true, ocean);
 		
 		ocean.print();
-		System.out.println(battleship.getBowRow());
-		System.out.println(battleship.getBowColumn());
+
 		
 	}
-
+	
+	@Test
+	public void testRandom() {
+		
+		Ocean ocean = new Ocean();
+		
+		ocean.placeAllShipsRandomly();
+		ocean.print();
+			
+		
+	}
 }

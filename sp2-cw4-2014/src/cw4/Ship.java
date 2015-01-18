@@ -57,8 +57,6 @@ public abstract class Ship {
 			
 			// Check if out of bounds
 			for(int x = column; x < column + this.getLength(); x++) {
-				// Debug
-				System.out.println("" + row + "," + x);
 				if(!ocean.isOnBoard(row, x)) {
 					return false;
 				}
@@ -91,9 +89,7 @@ public abstract class Ship {
 		// not occupied
 		for(int x = startRow; x <= endRow; x++) {
 			for(int y = startCol; y <= endCol; y++) {
-				System.out.print("" + x + "," + y);
 				if(ocean.isOnBoard(x, y)) {
-					System.out.println(" " + ocean.ships[x][y].toString());
 					 if(ocean.isOccupied(x, y)) {
 						return false;
 					}

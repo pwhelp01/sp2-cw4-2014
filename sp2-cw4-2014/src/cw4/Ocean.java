@@ -1,5 +1,11 @@
 package cw4;
 
+import java.awt.Point;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Random;
+import java.util.Stack;
 import java.util.StringJoiner;
 
 public class Ocean {
@@ -42,7 +48,84 @@ public class Ocean {
 	/* Business Logic */
 	public void placeAllShipsRandomly() {
 		
+		/* Build array of ships */
+		Stack<Ship> fleet = new Stack();
+		fleet.push(new Submarine());
+		fleet.push(new Submarine());
+		fleet.push(new Submarine());
+		fleet.push(new Submarine());
+		fleet.push(new Destroyer());
+		fleet.push(new Destroyer());
+		fleet.push(new Destroyer());
+		fleet.push(new Cruiser());
+		fleet.push(new Cruiser());
+		fleet.push(new Battleship());
+
+		
+		this.placeShip(fleet);
+		
 	}
+	
+	private void placeShip(Stack<Ship> fleet) {
+		
+		// No ships left to place - return 
+		if(fleet.empty()) {
+			return;
+		}
+		
+		// Get ship to place
+		Ship shipToPlace = fleet.pop();
+		
+		// Get list of empty spaces and shuffle to randomise attempts at placing
+		// ships
+		List<Point> emptyTiles = this.getEmptyTiles();
+		Collections.shuffle(emptyTiles);
+		
+		// Iterate through every empty tile, trying to place the ship
+		for(Point tile : emptyTiles) {
+			
+			// Get a random value for horizontal
+			Random random = new Random();
+			boolean horizontal = random.nextBoolean();
+			
+			// Get co-ordinates for attempt at placing ship
+			int row = (int) tile.getY();
+			int column = (int) tile.getX();
+			
+			// Attempt to place ship
+			if(shipToPlace.okToPlaceShipAt(row, column, horizontal, this)) {
+				shipToPlace.placeShipAt(row, column, horizontal, this);
+				this.placeShip(fleet);
+				break;
+			}
+			// Attempt failed, so flip ship orientation and try again!
+			else if(shipToPlace.okToPlaceShipAt(row, column, !horizontal, this)) {
+				shipToPlace.placeShipAt(row, column, !horizontal, this);
+				this.placeShip(fleet);
+				break;
+			}
+			
+		}
+		
+	}
+	
+	public List getEmptyTiles() {
+		
+		List<Point> emptyTiles = new ArrayList();
+		
+		// Iterate every tile looking for empty ones
+		for (int row = 0; row < this.ships.length; row++) {  
+		    for (int tile = 0; tile < this.ships[row].length; tile++) {  
+		        if(!isOccupied(row, tile)) {
+		        	emptyTiles.add(new Point(tile, row));
+		        }
+		    }  
+		}
+		
+		return emptyTiles;
+		
+	}
+	
 	
 	public boolean isOccupied(int row, int column) {
 		
