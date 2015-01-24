@@ -11,10 +11,10 @@ import java.util.StringJoiner;
 public class Ocean {
 
 	/* Properties */
-	Ship ships[][] = new Ship[10][10];
-	int shotsFired = 0;
-	int hitCount = 0;
-	int shipsSunk = 0;
+	private Ship ships[][] = new Ship[10][10];
+	private int shotsFired = 0;
+	private int hitCount = 0;
+	private int shipsSunk = 0;
 	
 	/* Methods */
 	/* Constructors */
@@ -49,7 +49,7 @@ public class Ocean {
 	public void placeAllShipsRandomly() {
 		
 		/* Build array of ships */
-		Stack<Ship> fleet = new Stack();
+		Stack<Ship> fleet = new Stack<Ship>();
 		fleet.push(new Submarine());
 		fleet.push(new Submarine());
 		fleet.push(new Submarine());
@@ -109,9 +109,9 @@ public class Ocean {
 		
 	}
 	
-	public List getEmptyTiles() {
+	public List<Point> getEmptyTiles() {
 		
-		List<Point> emptyTiles = new ArrayList();
+		List<Point> emptyTiles = new ArrayList<Point>();
 		
 		// Iterate every tile looking for empty ones
 		for (int row = 0; row < this.ships.length; row++) {  
@@ -159,8 +159,25 @@ public class Ocean {
 		return true;
 	}
 	
-	public boolean shootAt(int row, int column) {
-		return false;
+	public boolean shootAt (int row, int column) {
+		
+		// Check shot is on the board, and throw error if not
+		if(!this.isOnBoard(row, column)) {
+			throw new IllegalArgumentException("Tile " + column + ", " + row
+					+ " is not on the board");
+		}
+		
+		// Shoot at the ship tile and increment shots fired and ships sunk
+		Ship target = this.ships[row][column];
+		boolean hit = target.shootAt(row, column);
+		if(target.isSunk()) {
+			this.shipsSunk++;
+		}
+		this.shotsFired++;
+		
+		// Return result
+		return hit;
+
 	}
 	
 	public boolean isGameOver() {

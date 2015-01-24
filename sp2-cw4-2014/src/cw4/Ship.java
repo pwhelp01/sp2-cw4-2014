@@ -3,11 +3,11 @@ package cw4;
 public abstract class Ship {
 
 	/* Properties */
-	int bowRow;
-	int bowColumn;
-	int length;
-	boolean horizontal;
-	boolean[] hit;
+	protected int bowRow;
+	protected int bowColumn;
+	protected int length;
+	protected boolean horizontal;
+	protected boolean[] hit;
 	
 	/* Methods */
 	/* Constructors */
@@ -125,7 +125,26 @@ public abstract class Ship {
 	}
 	
 	public boolean shootAt(int row, int column) {
-		return false;
+		
+		// Section of ship being shot at
+		int section = 0;
+		
+		// If ship is sunk, always return false
+		if(this.isSunk()) {
+			return false;
+		}
+		
+		// Calculate which section has been hit, based on orientation of ship
+		if(this.horizontal) {
+			section = this.bowColumn - column;
+		}
+		else{
+			section = this.bowRow - row;
+		}
+		
+		// Mark section as hit and return true
+		this.hit[section] = true;
+		return true;
 	}
 	
 	public boolean isSunk() {
