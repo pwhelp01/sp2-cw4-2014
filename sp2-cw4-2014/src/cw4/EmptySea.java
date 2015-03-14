@@ -18,9 +18,31 @@ public class EmptySea extends Ship {
 		
 	}
 	
+	@Override 
+	public boolean shootAt(int row, int column) {
+		this.hit[this.length - 1] = true;
+		return false;
+	}
+	
 	@Override
 	public String toString() {
-		return "~";
+		
+		String rv = "";
+		
+		if(this.hit[this.printPointer]) {
+			rv = "-";
+		}
+		else{
+			rv = ".";
+		}
+		
+		this.printPointer++;
+		if(printPointer == this.length) {
+			this.printPointer = 0;
+		}
+		
+		return rv;
+		
 	}
 	
 	@Override

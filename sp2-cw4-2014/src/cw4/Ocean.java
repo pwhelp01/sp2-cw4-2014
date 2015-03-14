@@ -15,6 +15,7 @@ public class Ocean {
 	private int shotsFired = 0;
 	private int hitCount = 0;
 	private int shipsSunk = 0;
+	final private int fleetSize = 10;
 	
 	/* Methods */
 	/* Constructors */
@@ -176,6 +177,7 @@ public class Ocean {
 		Ship target = this.ships[row][column];
 		boolean hit = target.shootAt(row, column);
 		if(target.isSunk()) {
+			System.out.println("You sunk a " + target.getClass() + "!");
 			this.shipsSunk++;
 		}
 		this.shotsFired++;
@@ -186,7 +188,13 @@ public class Ocean {
 	}
 	
 	public boolean isGameOver() {
+		
+		if(this.shipsSunk == this.fleetSize) {
+			return true;
+		}
+		
 		return false;
+		
 	}
 	
 	public void print() {
@@ -205,12 +213,29 @@ public class Ocean {
 	
 	public void print2() {
 		
+		// Print line space
+		System.out.println();
+		
 		// Print column headers
 		StringJoiner headers = new StringJoiner(" ");
 		for(int i = 0; i < this.ships[0].length; i++) {
 			headers.add(Integer.toString(i));
 		}
+		System.out.print("  ");
 		System.out.println(headers);
+		
+		// Print board tiles
+		for (int row = 0; row < this.ships.length; row++) {  
+		    System.out.print(row + " ");
+			for (int tile = 0; tile < this.ships[row].length; tile++) {  
+		    	System.out.print(this.ships[row][tile]);
+		    	System.out.print(" ");
+		    }  
+		    
+		    System.out.println();
+		}
+		
+		System.out.println();
 		
 	}
 	

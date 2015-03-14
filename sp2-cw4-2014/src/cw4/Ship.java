@@ -8,6 +8,7 @@ public abstract class Ship {
 	protected int length;
 	protected boolean horizontal;
 	protected boolean[] hit;
+	protected int printPointer = 0;
 	
 	/* Methods */
 	/* Constructors */

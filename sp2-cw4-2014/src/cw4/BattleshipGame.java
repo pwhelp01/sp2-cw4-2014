@@ -4,6 +4,11 @@ import java.util.Scanner;
 
 public class BattleshipGame {
 
+	final private int MIN_ROW = 0;
+	final private int MAX_ROW = 9;
+	final private int MIN_COLUMN = 0;
+	final private int MAX_COLUMN = 9;
+	
 	public BattleshipGame() {
 		
 	}
@@ -18,9 +23,66 @@ public class BattleshipGame {
 	
 	public void run() {
 		
+		boolean keepPlaying = false;
+		
 		this.printGreeting();
-		System.out.println(this.getPlayAgain());
+		keepPlaying = this.readPlayAgain();
+		while(keepPlaying) {
+			this.gameLoop();
+			keepPlaying = this.readPlayAgain();
+		}
 		this.printGoodbye();
+		
+	}
+	
+	private void gameLoop() {
+		
+		Ocean ocean = new Ocean();
+		ocean.placeAllShipsRandomly();
+		
+		do{
+			ocean.print2();
+			int column = readInt("Fire at column: ", this.MIN_COLUMN, this.MAX_COLUMN);
+			int row = readInt("Fire at row: ", this.MIN_ROW, this.MAX_ROW);
+			System.out.println();
+			System.out.println("You fired at (" + column + "," + row + ")");
+			
+			if(ocean.shootAt(row, column)) {
+				System.out.println("Hit!");
+			}
+			else{
+				System.out.println("Miss!");
+			}
+		} while(!ocean.isGameOver());
+		
+		
+	}
+	
+	private int readInt(final String PROMPT, final int MIN, final int MAX) {
+		
+		int rv = 0;
+		boolean sentinel = false;
+		
+		do {
+			try {
+				Scanner in = new Scanner(System.in);
+				System.out.print(PROMPT);
+				rv = in.nextInt();
+				
+				if(rv < MIN || rv > MAX) {
+					throw new Exception();
+				}
+				
+				sentinel = true;
+				
+			}
+			catch (Exception e) {
+				System.out.println("Invalid input!  Please enter a number between "
+						+ MIN + " and " + MAX);
+			}
+		} while(!sentinel);
+		
+		return rv;
 		
 	}
 	
@@ -44,15 +106,15 @@ public class BattleshipGame {
 		
 	}
 	
-	private boolean getPlayAgain() {
+	private boolean readPlayAgain() {
 		
 		boolean rv = false;
 		boolean sentinel = false;
-		Scanner in = new Scanner(System.in);
+		
 		
 		do {
 			try {
-				
+				Scanner in = new Scanner(System.in);
 				System.out.println();
 				System.out.print("New game? (y/n): ");
 				String input = in.next();
@@ -71,17 +133,12 @@ public class BattleshipGame {
 			}
 			catch(Exception e) {
 				System.out.println("Invalid input.  Please try again.");
-				in.nextLine();
 			}
 			
 		} while(!sentinel);
-		
-		in.close();
-		in = null;
 		
 		return rv;
 		
 	}
 
-	
 }
