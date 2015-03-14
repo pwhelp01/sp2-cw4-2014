@@ -108,14 +108,14 @@ public abstract class Ship {
 			
 			// Place horizontal ship
 			for(int x = column; x < column + this.length; x++) {
-				ocean.ships[row][x] = this;
+				ocean.setShip(row, x, this);
 			}
 			
 		}
 		// Place vertical ship
 		else {
 			for(int y = row; y < row + this.length; y++) {
-				ocean.ships[y][column] = this;
+				ocean.setShip(y, column, this);
 			}
 		}
 		

@@ -45,6 +45,11 @@ public class Ocean {
 		return this.ships;
 	}
 	
+	public void setShip(int row, int column, Ship ship) {
+		this.ships[row][column] = ship;
+	}
+	
+	
 	/* Business Logic */
 	public void placeAllShipsRandomly() {
 		
