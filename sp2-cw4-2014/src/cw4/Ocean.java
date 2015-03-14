@@ -176,9 +176,11 @@ public class Ocean {
 		// Shoot at the ship tile and increment shots fired and ships sunk
 		Ship target = this.ships[row][column];
 		boolean hit = target.shootAt(row, column);
-		if(target.isSunk()) {
-			System.out.println("You sunk a " + target.getClass() + "!");
-			this.shipsSunk++;
+		if(hit) {
+			if(target.isSunk()) {
+				System.out.println("You sunk a " + target.getShipType() + "!");
+				this.shipsSunk++;
+			}
 		}
 		this.shotsFired++;
 		

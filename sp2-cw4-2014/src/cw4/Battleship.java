@@ -18,10 +18,11 @@ public class Battleship extends Ship {
 		
 	}
 	
+	/*
 	@Override
 	public String toString() {
 		return "B";
 	}
-
+	*/
 	
 }

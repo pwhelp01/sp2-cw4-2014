@@ -18,9 +18,11 @@ public class Submarine extends Ship {
 		
 	}
 	
+	/*
 	@Override
 	public String toString() {
 		return "S";
 	}
-
+	*/
+	
 }

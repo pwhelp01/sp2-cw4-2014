@@ -53,8 +53,20 @@ public class BattleshipGame {
 			else{
 				System.out.println("Miss!");
 			}
+			
+			// Sleep for a second so user can read result of shot
+			try {
+				Thread.sleep(1000);
+			}
+			catch(InterruptedException e) {
+				
+			}
+			
 		} while(!ocean.isGameOver());
 		
+		System.out.println();
+		System.out.println("Congratulations!  You sunk all ships in " 
+				+ ocean.getShotsFired() + " shots.");
 		
 	}
 	

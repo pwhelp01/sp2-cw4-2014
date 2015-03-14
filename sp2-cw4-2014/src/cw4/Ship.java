@@ -122,6 +122,7 @@ public abstract class Ship {
 		
 		this.bowRow = row;
 		this.bowColumn = column;
+		this.horizontal = horizontal;
 		
 	}
 	
@@ -137,10 +138,10 @@ public abstract class Ship {
 		
 		// Calculate which section has been hit, based on orientation of ship
 		if(this.horizontal) {
-			section = this.bowColumn - column;
+			section = column - this.bowColumn;
 		}
 		else{
-			section = this.bowRow - row;
+			section = row - this.bowRow;
 		}
 		
 		// Mark section as hit and return true
@@ -160,6 +161,30 @@ public abstract class Ship {
 		// Otherwise, all sections are destroyed and ship is sunk
 		return true;
 	}
+	
+	@Override
+	public String toString() {
+		String rv = "";
+		
+		if(this.isSunk()) {
+			rv = "x";
+		}
+		if(this.hit[this.printPointer]) {
+			rv = "S";
+		}
+		else{
+			rv = ".";
+		}
+		
+		this.printPointer++;
+		if(printPointer == this.length) {
+			this.printPointer = 0;
+		}
+		
+		return rv;
+		
+	}
+	
 	
 	
 }
