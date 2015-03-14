@@ -8,12 +8,12 @@ public abstract class Ship {
 	protected int length;
 	protected boolean horizontal;
 	protected boolean[] hit;
-	protected int printPointer = 0;
+	protected int printPointer;
 	
 	/* Methods */
 	/* Constructors */
 	public Ship() {
-		// TODO Auto-generated constructor stub
+		this.printPointer = 0;
 	}
 	
 	/* Getters and Setters */
@@ -169,7 +169,7 @@ public abstract class Ship {
 		if(this.isSunk()) {
 			rv = "x";
 		}
-		if(this.hit[this.printPointer]) {
+		else if(this.hit[this.printPointer]) {
 			rv = "S";
 		}
 		else{

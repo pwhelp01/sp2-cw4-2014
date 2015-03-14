@@ -138,10 +138,10 @@ public class Ocean {
 		// Check is on board?
 		
 		// Get the correct value of an empty tile
-		final String EMPTY = new EmptySea().toString();
+		final String EMPTY = new EmptySea().getShipType();
 		
 		// Check if the tile in question is occupied, return false if it is
-		if(this.ships[row][column].toString().equals(EMPTY)) {
+		if(this.ships[row][column].getShipType().equals(EMPTY)) {
 			return false;
 		}
 		
