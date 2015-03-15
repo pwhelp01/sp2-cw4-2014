@@ -44,7 +44,7 @@ public class EmptySea extends Ship {
 	 * user knows that they fired at this location.
 	 * 
 	 * @param row Row being shot at 
-	 * @param col Column being shot at
+	 * @param column Column being shot at
 	 * @return Always false (can't hit empty sea!)
 	 */
 	@Override

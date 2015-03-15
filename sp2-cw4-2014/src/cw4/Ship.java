@@ -9,6 +9,8 @@
 
 package cw4;
 
+import org.junit.Test;
+
 /**
  * Abstract class all concrete ship types inherit from
  * 
@@ -68,7 +70,7 @@ public abstract class Ship {
 	 * 
 	 * @param column Column number to locate the ship's bow
 	 */
-	public void setBowColund(int column) {
+	public void setBowColumn(int column) {
 		this.bowColumn = column;
 	}
 	
