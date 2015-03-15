@@ -28,7 +28,7 @@ import java.util.StringJoiner;
 public class Ocean {
 
 	/* Properties */
-	private Ship ships[][] = new Ship[10][10];
+	private Ship[][] ships = new Ship[10][10];
 	private int shotsFired = 0;
 	private int hitCount = 0;
 	private int shipsSunk = 0;
