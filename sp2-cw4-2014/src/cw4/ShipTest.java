@@ -15,6 +15,12 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+/**
+ * J-Unit tests for the Ship classes
+ * 
+ * @author pete
+ *
+ */
 public class ShipTest {
 	
 	Ocean ocean;
